@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import {useSound} from 'use-sound';
 import { motion } from 'framer-motion';
 import { Envelope } from './components/Envelope';
@@ -11,7 +11,7 @@ import { Flowers } from './components/Flowers';
 import { FinalPopup } from './components/FinalPopup';
 
 export default function App() {
-  const [stage, setStage] = useState(0);
+  
   // Stage 0: Closed envelope
   // Stage 1: Photos burst out and scattered
   // Stage 2: Photos fading, folded letter appears
@@ -22,6 +22,9 @@ export default function App() {
   // Stage 7: Final popup
 
   // Setup the sound - ensure the file name matches exactly what's in your public folder
+  const [loading, setLoading] = useState(true);
+  const [imagesLoaded, setImagesLoaded] = useState(0);
+  const [stage, setStage] = useState(0);
   const [play, { stop }] = useSound('/birthday music.mp3', { 
     volume: 0.5, 
     interrupt: true,
@@ -32,7 +35,41 @@ export default function App() {
   const photos = [
     '/phto1.jpg','/phto2.jpg','/phto3.jpg','/phto4.jpg','/phto5.jpg','/phto6.jpg','/phto7.jpg','/phto8.jpg','/phto9.jpg','/phto10.jpg','/phto11.jpg','/phto12.jpg','/phto13.jpg','/phto14.jpg','/phto15.jpg','/phto16.jpg','phto17.jpg','/phto18.jpg','/phto19.jpg','/phto20.jpg','/phto21.jpg','/phto22.jpg','/phto23.jpg','/phto24.jpg','/phto25.jpg'
   ];
+// Logic to pre-load images
+  useEffect(() => {
+    photos.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+      img.onload = () => {
+        setImagesLoaded((prev) => prev + 1);
+      };
+    });
+  }, []);
+  // Once all 25 images are loaded, hide the loader
+  useEffect(() => {
+    if (imagesLoaded === photos.length) {
+      // Small delay so it doesn't flicker too fast
+      setTimeout(() => setLoading(false), 1000);
+    }
+  }, [imagesLoaded, photos.length]);
 
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-pink-50 flex flex-col items-center justify-center">
+        {/* A pulsing heart icon */}
+        <motion.div
+          animate={{ scale: [1, 1.2, 1] }}
+          transition={{ repeat: Infinity, duration: 1 }}
+          className="text-6xl mb-4"
+        >
+          ❤️
+        </motion.div>
+        <p className="text-pink-600 font-medium animate-pulse">
+          Preparing your surprise... {Math.round((imagesLoaded / photos.length) * 100)}%
+        </p>
+      </div>
+    );
+  }
   // Edit this message in your code!
   const letterMessage = `Dear Ms. Shedge,
 
