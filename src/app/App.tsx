@@ -107,10 +107,11 @@ Hb of 21 years of Marriage.
 
   const handleClick = () => {
     if (stage === 0) {
-      play();//play music  Open envelope and show photos
+      // Force a stop of any ghost instances before playing
+      stop(); 
+      play(); 
       setStage(1);
     } else if (stage === 1) {
-      // Fade photos and show folded letter
       setStage(2);
     } else if (stage === 2) {
       // Open letter with hearts
@@ -158,17 +159,29 @@ Hb of 21 years of Marriage.
         </motion.div>
       )}
 
-      {/* Main Content */}
-      <div className="relative min-h-screen w-full overflow-hidden bg-pink-50" onClick={handleClick}>
-       {/* Envelope, PhotoBurst, etc. */}
-        {stage === 0 && (
-          <Envelope isOpen={false} onClick={() => {}} />
-        )}
-        {stage >= 1 && stage < 2 && (
-          <Envelope isOpen={true} onClick={() => {}} />
-        )}
-      </div>
-
+      {/* Main Content - Centered Wrapper */}
+<div className="fixed inset-0 flex items-center justify-center z-20 pointer-events-none">
+  {/* This inner div now handles the centering logic */}
+  <div className="relative flex items-center justify-center pointer-events-auto">
+    {stage === 0 && (
+      <Envelope isOpen={false} onClick={() => {}} />
+    )}
+    {stage >= 1 && stage < 2 && (
+      <Envelope isOpen={true} onClick={() => {}} />
+    )}
+    
+    {/* If you want the Letter to also be perfectly centered, 
+        make sure it is inside a similar fixed flex container */}
+    {stage >= 2 && stage < 6 && (
+      <Letter
+        isVisible={true}
+        isOpen={stage >= 3 && stage < 5}
+        onClick={() => {}}
+        message={letterMessage}
+      />
+    )}
+  </div>
+</div>
       {/* Photos - show from stage 1 until stage 2, then show again at stage 5-6 */}
       {(stage >= 1 && stage < 2) && (
         <PhotoBurst 
