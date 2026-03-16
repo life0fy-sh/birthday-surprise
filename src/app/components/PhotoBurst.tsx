@@ -11,7 +11,6 @@ export function PhotoBurst({ photos, isVisible, isFaded }: PhotoBurstProps) {
   // This calculates a clear grid position for every photo
   const scatteredPositions = useMemo(() => {
     const totalPhotos = photos.length;
-    // Calculate how many rows and columns we need (e.g., 5x5 for 25 photos)
     const columns = Math.ceil(Math.sqrt(totalPhotos));
     const rows = Math.ceil(totalPhotos / columns);
 
@@ -19,16 +18,16 @@ export function PhotoBurst({ photos, isVisible, isFaded }: PhotoBurstProps) {
       const row = Math.floor(i / columns);
       const col = i % columns;
 
-      // Position photos in a grid from -40% to 40% of the screen
-      // This ensures they stay away from each other
-      const x = ((col / (columns - 1)) - 0.5) * 85; 
-      const y = ((row / (rows - 1)) - 0.5) * 85;
+      // REDUCED SPREAD: Changed 85 to 65
+      // This keeps the center of the photos within the inner 65% of the screen
+      const x = columns > 1 ? ((col / (columns - 1)) - 0.5) * 65 : 0; 
+      const y = rows > 1 ? ((row / (rows - 1)) - 0.5) * 65 : 0;
 
       return {
         x: `${x}vw`,
         y: `${y}vh`,
-        rotate: (Math.random() - 0.5) * 15, // Small tilt for the "photo" look
-        scale: 0.85, // Slightly smaller so they don't touch
+        rotate: (Math.random() - 0.5) * 15,
+        scale: 0.8, // Slightly smaller to prevent edge-clipping
       };
     });
   }, [photos.length]);
@@ -42,7 +41,7 @@ export function PhotoBurst({ photos, isVisible, isFaded }: PhotoBurstProps) {
           return (
             <motion.div
               key={photo + index}
-              className="absolute w-40 h-52 md:w-48 md:h-64 rounded-sm shadow-xl border-[6px] border-white bg-white"
+              className="absolute w-24 h-32 md:w-40 md:h-52 rounded-sm shadow-xl border-[4px] border-white bg-white"
               initial={{ scale: 0, opacity: 0, y: 100 }} // Starts from bottom
               animate={{
                 x: pos.x,
