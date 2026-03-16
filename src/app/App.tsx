@@ -73,24 +73,27 @@ export default function App() {
   // Edit this message in your code!
   const letterMessage = `Dear Ms. Shedge,
 
-Happy Birthday to the to the prettiest girl in our class and the one who caught my eye at the very first day  . It's kinda creepy but all of this in a good way only , you're really so pretty i can't take my eyes off you .
-I'm writting this is english because , hech sagle marathit bolneko maut aati hai 😔🙏🏻
-To be honest , I'm kinda guilty for ruining what we had , we were so cool , still are ,but that lustre is lacking , but you still outshine everything in this world and make me forget about it ,when you're around 🌼.
+Happy Birthday to the to the prettiest girl in our class and the one who caught my eye at the very first day  . It's kinda creepy but all of this in a good way okayy.! you're really so pretty I can't take my eyes off you .
+
+I'm writting this in english because , hech sagle marathit bolneko maut aati hai 😔🙏🏻
+To be honest , I'm kinda guilty for ruining what we had , we were so cool , we still are ,but that lustre is lacking , yet you still continue to outshine everything in this world and make me forget about it ,when you're around 🌼.
+
 I never believed in love at first sight, but then you walked in , caught my attention , it really seems surreal,Everything. I'm really sad that I will go onto your "guys who thought they had a chance with me " list but hey, who am I to complain .
 Shedge , you're really something...
 Something soo mesmerizingly beautiful even  words can't describe you , not just your appearance, everything you do , so graceful, so elegant ...🧿
 
-The messy hair coming onto your face , the little black eyeliner ka dot on your forehead makes you look so charismatic, the bracelet on your soft hands , softer than ever (vim bar does the job I guess ) , the way you talk and throw all these jokes sooo effortlessly, YOU'RE ACTUALLY So Funny , i really love that about you  , your smile ahh killer , I'm not even kidding (or am I ) haha ...
+The messy hair coming onto your face , the little black eyeliner ka dot on your forehead makes you look so charismatic, the bracelet on your soft hands , softer than ever (vim bar does the job I guess ) , the way you talk and throw all these jokes sooo effortlessly, YOU'RE ACTUALLY So Funny , I really love that about you  , your smile ahh killer , I'm not even kidding (or am I ) haha ...
 
 I would never understand why you term yourself as a very boring and silent person, coz you're really not , No one can ever be bored when sitting next to you.
 I feel like you really have a very different image about yourself from what others see when they look at you and trust me , you're soo much more fun person to be with .
 You're the coolest person I have seen, I get the chills when you're near , you're THAT cool 🌷.
 
-it's a pity to not go on a single date with just you ( there was one tho ) , ahh boring stuff aside 
-I really appreciate your kind gestures , i remember you were throwing something in the dustbin , it fell over , you picked up and threw it in , I  was like SHE'S JUST LIKE MEEEE aahhhh .
+It's a pity to not have gone on a single date with just you ( there was one tho ) , ahh boring stuff aside 
+I really appreciate your kind gestures , I remember you were throwing something in the dustbin , it fell over , you picked up and threw it in , I  was like , SHE'S JUST LIKE MEEEE aahhhh ...
 I really love the warmth in your voice , it's so comforting to listen to ..
 The way everything you do becomes so graceful, ethereal, it's crazyyy....
 I'm not doing this to get something in return , just wanna make you feel happy and make you realise ,you're very different from how you see yourself and how others see you .
+You're the sweetest person to everyone ,I'm sure all will agree
 You're the most chatpati mahila I've ever met...
 No one can ever come close to what you are , even if there may be PPL if nothing but better than you , they'll never be as special as you are ..
 Everything about you is perfectly beautiful and I hope you stay blessed always and live a happy and healthy life.
@@ -156,7 +159,8 @@ Hb of 21 years of Marriage.
       )}
 
       {/* Main Content */}
-      <div className="fixed inset-0 flex items-center justify-center pointer-events-none">
+      <div className="relative min-h-screen w-full overflow-hidden bg-pink-50" onClick={handleClick}>
+       {/* Envelope, PhotoBurst, etc. */}
         {stage === 0 && (
           <Envelope isOpen={false} onClick={() => {}} />
         )}
