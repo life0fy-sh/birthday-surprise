@@ -1,6 +1,7 @@
 import { useState,useEffect } from 'react';
 import {useSound} from 'use-sound';
 import { motion } from 'framer-motion';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import { Envelope } from './components/Envelope';
 import { PhotoBurst } from './components/PhotoBurst';
 import { Letter } from './components/Letter';
@@ -258,6 +259,9 @@ Hb of 21 years of Marriage.
       {stage === 7 && (
         <FinalPopup isVisible={true} onClose={handlePopupClose} />
       )}
+
+      {/* Vercel Speed Insights */}
+      <SpeedInsights />
     </div>
   );
   
